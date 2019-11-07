@@ -5,6 +5,7 @@ using System.Text;
 
 using THNETII.WinApi.Native.MinWinBase;
 using THNETII.WinApi.Native.MinWinDef;
+using THNETII.WinApi.Native.SysInfoApi;
 
 using static System.Runtime.InteropServices.CallingConvention;
 using static THNETII.WinApi.Native.MinWinBase.LMEM_FLAGS;
@@ -18,12 +19,13 @@ using EntryPointNotFoundException = System.Exception;
 
 namespace THNETII.WinApi.Native.WinBase
 {
+    using static SysInfoApiFunctions;
 
     public static partial class WinBaseFunctions
     {
         // C:\Program Files (x86)\Windows Kits\10\Include\10.0.17134.0\um\WinBase.h, line 82
         #region DefineHandleTable macro
-        // #define DefineHandleTable(w)            ((w),TRUE)
+        // TODO: #define DefineHandleTable(w)            ((w),TRUE)
         #endregion
         // C:\Program Files (x86)\Windows Kits\10\Include\10.0.17134.0\um\WinBase.h, line 83
         #region LimitEmsPages macro
@@ -33,19 +35,25 @@ namespace THNETII.WinApi.Native.WinBase
         #endregion
         // C:\Program Files (x86)\Windows Kits\10\Include\10.0.17134.0\um\WinBase.h, line 84
         #region SetSwapAreaSize macro
-        // #define SetSwapAreaSize(w)              (w)
+        // TODO: #define SetSwapAreaSize(w)              (w)
         #endregion
         // C:\Program Files (x86)\Windows Kits\10\Include\10.0.17134.0\um\WinBase.h, line 85
         #region LockSegment macro
-        // #define LockSegment(w)                  GlobalFix((HANDLE)(w))
+        // TODO: #define LockSegment(w)                  GlobalFix((HANDLE)(w))
         #endregion
         // C:\Program Files (x86)\Windows Kits\10\Include\10.0.17134.0\um\WinBase.h, line 86
         #region UnlockSegment macro
-        // #define UnlockSegment(w)                GlobalUnfix((HANDLE)(w))
+        // TODO: #define UnlockSegment(w)                GlobalUnfix((HANDLE)(w))
         #endregion
         // C:\Program Files (x86)\Windows Kits\10\Include\10.0.17134.0\um\WinBase.h, line 94
         #region GetCurrentTime macro
-        // TODO: #define GetCurrentTime()                GetTickCount()
+        /// <inheritdoc cref="GetTickCount"/>
+        [Obsolete("GetCurrentTime overflows roughly every 49 days. Code that does not take that into account can loop indefinitely. " + nameof(GetTickCount64) + " operates on 64 bit values and does not have that problem.")]
+        public static uint GetCurrentTime() => GetTickCount();
+        #endregion
+        // C:\Program Files (x86)\Windows Kits\10\Include\10.0.17134.0\um\WinBase.h, line 102
+        #region Yield macro
+        public static void Yield() { }
         #endregion
         // C:\Program Files (x86)\Windows Kits\10\Include\10.0.17134.0\um\WinBase.h, line 116
         #region CaptureStackBackTrace function

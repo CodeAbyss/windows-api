@@ -34,6 +34,7 @@
   <ItemGroup Label="Header Project References">
     <ProjectReference Include="..\THNETII.WinApi.Headers.MinWinBase\THNETII.WinApi.Headers.MinWinBase.csproj" />
     <ProjectReference Include="..\THNETII.WinApi.Headers.MinWinDef\THNETII.WinApi.Headers.MinWinDef.csproj" />
+    <ProjectReference Include="..\THNETII.WinApi.Headers.SysInfoApi\THNETII.WinApi.Headers.SysInfoApi.csproj" />
     <ProjectReference Include="..\THNETII.WinApi.Headers.WinNT\THNETII.WinApi.Headers.WinNT.csproj" />
   </ItemGroup>
 
